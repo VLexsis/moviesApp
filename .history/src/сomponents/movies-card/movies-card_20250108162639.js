@@ -38,13 +38,19 @@ export default class MoviesCard extends Component {
     
 
     getMoviesCard() {
-        this.movieServices.fetchMovies()
-        .then((data) => {
-            this.setState({ movies: data, loading: false });
-        })
-        .catch(() => {
-            this.setState({ error: true, loading: false });
-        });
+       this.fetchMovies()
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Ошибка при загрузке данных');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({ movies: data.results, loading: false });
+            })
+            .catch(() => {
+                this.setState({ error: true, loading: false });
+            });
     }
 
     render() {

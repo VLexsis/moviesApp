@@ -3,10 +3,9 @@ import { Card, Row, Col } from 'antd';
 import { format } from 'date-fns';
 import Spinner from '../spinner/spinner';
 import { Offline, Online } from 'react-detect-offline';
-import MovieServices from '../../services/services'; 
+import  
 
 const { Meta } = Card;
-
 
 function shortenTextByWords(text, maxWords) {
     const words = text.split(' ');
@@ -24,7 +23,6 @@ export default class MoviesCard extends Component {
             loading: true,
             error: false,
         };
-        this.movieServices = new MovieServices();
     }
 
     componentDidMount() {
@@ -38,13 +36,21 @@ export default class MoviesCard extends Component {
     
 
     getMoviesCard() {
-        this.movieServices.fetchMovies()
-        .then((data) => {
-            this.setState({ movies: data, loading: false });
-        })
-        .catch(() => {
-            this.setState({ error: true, loading: false });
-        });
+        fetch(
+            'https://api.themoviedb.org/3/search/movie?api_key=ed0fc049bfb3cad69f27a301343882ad&query=return&include_adult=false&language=en-US&page=1'
+        )
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Ошибка при загрузке данных');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({ movies: data.results, loading: false });
+            })
+            .catch(() => {
+                this.setState({ error: true, loading: false });
+            });
     }
 
     render() {
