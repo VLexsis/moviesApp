@@ -1,0 +1,17 @@
+.movies-list {
+    display: flex;
+    justify-content: center !important;
+    flex-wrap: wrap;
+    gap: 36px;
+    box-sizing: border-box;
+}
+.movies-list .ant-row {
+    box-sizing: border-box;
+    margin: 0 !important; /* Убираем внешние отступы */
+    padding: 0 !important; /* Убираем внутренние отступы */
+}
+
+.movies-list .ant-col {
+    box-sizing: border-box;
+    padding: 0 !important; /* Убираем внутренние отступы */
+}

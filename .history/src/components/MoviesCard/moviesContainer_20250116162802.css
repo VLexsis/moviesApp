@@ -1,0 +1,51 @@
+/* Основной контейнер карточки */
+.movie-card {
+    width: 451px; /* Фиксированная ширина */
+    height: 279px; /* Фиксированная высота */
+    display: flex; /* Используем flex для выравнивания содержимого */
+    overflow: hidden; /* Скрываем всё, что выходит за пределы карточки */
+}
+
+/* Контейнер для изображения */
+.movie-card__image-container {
+    width: 183px; /* Ширина изображения */
+    height: 100%; /* Высота равна высоте карточки */
+    overflow: hidden; /* Скрываем всё, что выходит за пределы контейнера */
+}
+
+/* Изображение */
+.movie-card__image {
+    width: 100%; /* Занимает всю ширину контейнера */
+    height: 100%; /* Занимает всю высоту контейнера */
+    object-fit: cover; /* Изображение заполняет контейнер */
+}
+
+/* Контейнер для текста */
+.movie-card__text-container {
+    width: 268px; /* Ширина текстового блока */
+    padding: 12px; /* Внутренние отступы */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Равномерное распределение контента */
+}
+
+/* Заголовок */
+.movie-card__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px; /* Отступ снизу */
+}
+
+/* Описание */
+.movie-card__description {
+    font-size: 14px;
+    color: #666; /* Серый цвет текста */
+    margin-bottom: 8px; /* Отступ снизу */
+}
+
+/* Дата выпуска */
+.movie-card__release-date {
+    font-size: 14px;
+    color: #888; /* Серый цвет текста */
+    margin-bottom: 8px; /* Отступ снизу */
+}

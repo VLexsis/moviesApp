@@ -1,0 +1,6 @@
+.movies-app__pagination {
+    display: 'flex';
+    justifycontent: 'center', 
+    alignItems: 'center', 
+    height: '100vh',
+}

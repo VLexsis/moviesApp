@@ -1,0 +1,19 @@
+.movies-list {
+    display: flex;
+    justify-content: center !important;
+    flex-wrap: wrap;
+    gap: 36px;
+    margin: 0 auto; /* Центрируем контейнер */
+    box-sizing: border-box !important;
+}
+.movies-list .ant-row {
+    box-sizing: border-box !important;
+    margin: 0 !important; /* Убираем внешние отступы */
+    padding: 0 !important; /* Убираем внутренние отступы */
+}
+
+.movies-list .ant-col {
+    display: flex !important;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали (если нужно) */
+}

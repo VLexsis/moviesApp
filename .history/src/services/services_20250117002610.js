@@ -1,0 +1,26 @@
+export default class MovieServices {
+    constructor() {
+        this.apiKey = 'ed0fc049bfb3cad69f27a301343882ad' // Замени на свой API-ключ
+        this.baseUrl = 'https://api.themoviedb.org/3'
+    }
+
+    async createGuestSession() {
+        const url = `${this.baseUrl}/authentication/guest_session/new?api_key=${this.apiKey}`
+        const response = await fetch(url)
+        if (!response.ok) {
+            throw new Error('Ошибка при создании гостевой сессии')
+        }
+        return response.json()
+    }
+
+    async fetchMovies(query, page) {
+        const url = `${this.baseUrl}/search/movie?api_key=${this.apiKey}&query=${query}&page=${page}`
+        const response = await fetch(url)
+        if (!response.ok) {
+            throw new Error('Ошибка при загрузке данных')
+        }
+        return response.json()
+    }
+}
+
+export default MovieServices

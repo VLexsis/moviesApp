@@ -1,0 +1,54 @@
+.movie-card {
+    width: 459px; /* Ширина карточки */
+    height: 279px; /* Высота карточки */
+    border-radius: 0px !important; /* Закругленные углы */
+    overflow: hidden; /* Скрываем выходящие за пределы элементы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+    padding: 0;
+}
+
+.movie-card__content {
+    display: flex; /* Используем flexbox для расположения элементов */
+    height: 100%; /* Занимаем всю высоту карточки */
+}
+
+.movie-card__image {
+    width: 183px; /* Ширина изображения */
+    height: 100%; /* Высота изображения равна высоте карточки */
+    object-fit: cover; /* Обрезаем изображение, чтобы оно заполнило контейнер */
+}
+
+.movie-card__details {
+    flex: 1; /* Занимаем оставшееся пространство */
+    padding: 16px; /* Отступы внутри блока с текстом */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Распределяем контент по высоте */
+}
+
+.movie-card__details .ant-card-meta-title {
+    font-size: 18px; /* Размер заголовка */
+    margin-bottom: 8px; /* Отступ снизу */
+    word-wrap: break-word; /* Перенос слов на новую строку */
+    white-space: normal;
+}
+
+.movie-card__details p {
+    margin: 0; /* Убираем отступы у параграфов */
+    font-size: 14px; /* Размер текста */
+    color: #666; /* Цвет текста */
+}
+
+.ant-card-body {
+    padding: 0 !important; /* Убираем паддинги */
+}
+.custom-rate .ant-rate-star {
+    font-size: 16px; /* Уменьшаем размер на 20% */
+}
+
+.movie-card__genres {
+    box-sizing: border-box;
+border: 1px solid rgb(217, 217, 217);
+border-radius: 2px;
+background: rgb(250, 250, 250);
+}
