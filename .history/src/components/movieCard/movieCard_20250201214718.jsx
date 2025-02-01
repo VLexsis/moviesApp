@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import { Card, Rate } from 'antd'
 import { format } from 'date-fns'
 import './movieCard.css'
@@ -17,11 +17,10 @@ function shortenTextByWords(text, maxWords) {
 
 class MovieCard extends Component {
     static contextType = GenresContext
-
     constructor(props) {
         super(props)
         this.state = {
-            rating: props.rating || 0,
+            rating: props.movie.rating || 0,
         }
 
         this.movieServices = new MovieServices()
@@ -39,7 +38,6 @@ class MovieCard extends Component {
         try {
             await this.movieServices.rateMovie(movie.id, guestSessionId, value)
             this.setState({ rating: value })
-            onRateMovie(movie.id, value)
         } catch (error) {
             console.error('Ошибка:', error)
         }

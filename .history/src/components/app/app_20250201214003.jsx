@@ -121,18 +121,8 @@ class App extends Component {
         })
     }
 
-    updateRating = (movieId, rating) => {
-        this.setState((prevState) => ({
-            ratings: {
-                ...prevState.ratings,
-                [movieId]: rating,
-            },
-        }))
-    }
-
     render() {
-        const { query, movies, ratedMovies, loading, currentPage, totalPages, guestSessionId, genres, ratings } =
-            this.state
+        const { query, movies, ratedMovies, loading, currentPage, totalPages, guestSessionId, genres } = this.state
 
         return (
             <GenresProvider value={genres}>
@@ -163,8 +153,6 @@ class App extends Component {
                                             movies={movies || []}
                                             guestSessionId={guestSessionId}
                                             genres={genres}
-                                            ratings={ratings}
-                                            onRateMovie={this.updateRating}
                                         />
                                         {query && (
                                             <PaginationControl
@@ -180,13 +168,7 @@ class App extends Component {
                                 {loading ? (
                                     <Spinner />
                                 ) : (
-                                    <MoviesList
-                                        movies={ratedMovies}
-                                        guestSessionId={guestSessionId}
-                                        genres={genres}
-                                        ratings={ratings}
-                                        onRateMovie={this.updateRating}
-                                    />
+                                    <MoviesList movies={ratedMovies} guestSessionId={guestSessionId} />
                                 )}
                             </TabPane>
                         </Tabs>

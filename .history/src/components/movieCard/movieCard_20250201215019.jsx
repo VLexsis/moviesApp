@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import { Card, Rate } from 'antd'
 import { format } from 'date-fns'
 import './movieCard.css'

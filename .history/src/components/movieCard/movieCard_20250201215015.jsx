@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import { Card, Rate } from 'antd'
 import { format } from 'date-fns'
 import './movieCard.css'
@@ -16,56 +16,56 @@ function shortenTextByWords(text, maxWords) {
 }
 
 class MovieCard extends Component {
-    static contextType = GenresContext
+    static contextType = GenresContext;
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             rating: props.rating || 0,
-        }
+        };
 
-        this.movieServices = new MovieServices()
+        this.movieServices = new MovieServices();
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.rating !== this.props.rating) {
-            this.setState({ rating: this.props.rating })
+            this.setState({ rating: this.props.rating });
         }
     }
 
     handleRateChange = async (value) => {
-        const { movie, guestSessionId, onRateMovie } = this.props
+        const { movie, guestSessionId, onRateMovie } = this.props;
 
         try {
-            await this.movieServices.rateMovie(movie.id, guestSessionId, value)
-            this.setState({ rating: value })
-            onRateMovie(movie.id, value)
+            await this.movieServices.rateMovie(movie.id, guestSessionId, value);
+            this.setState({ rating: value });
+            onRateMovie(movie.id, value);
         } catch (error) {
-            console.error('Ошибка:', error)
+            console.error('Ошибка:', error);
         }
-    }
+    };
 
     getRatingColor = (rating) => {
-        if (rating >= 0 && rating < 3) return '#E90000'
-        if (rating >= 3 && rating < 5) return '#E97E00'
-        if (rating >= 5 && rating < 7) return '#E9D100'
-        if (rating >= 7) return '#66E900'
-        return '#E90000'
-    }
+        if (rating >= 0 && rating < 3) return '#E90000';
+        if (rating >= 3 && rating < 5) return '#E97E00';
+        if (rating >= 5 && rating < 7) return '#E9D100';
+        if (rating >= 7) return '#66E900';
+        return '#E90000';
+    };
 
     render() {
-        const { movie } = this.props
-        const { rating } = this.state
-        const genres = this.context
+        const { movie } = this.props;
+        const { rating } = this.state;
+        const genres = this.context;
 
         const movieGenres = movie.genre_ids
             ? movie.genre_ids.map((id) => genres.find((genre) => genre.id === id)?.name)
-            : []
+            : [];
 
-        const displayedGenres = movieGenres.filter(Boolean).slice(0, 3)
-        const hasMoreGenres = movieGenres.length > 3
+        const displayedGenres = movieGenres.filter(Boolean).slice(0, 3);
+        const hasMoreGenres = movieGenres.length > 3;
 
-        const ratingColor = this.getRatingColor(movie.vote_average)
+        const ratingColor = this.getRatingColor(movie.vote_average);
 
         return (
             <Card className="movie-card">
@@ -105,9 +105,15 @@ class MovieCard extends Component {
                     </div>
                 </div>
             </Card>
-        )
+        );
     }
 }
+
+MovieCard.defaultProps = {
+    genres: [],
+};
+
+export default MovieCard;
 
 MovieCard.defaultProps = {
     genres: [],

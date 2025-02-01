@@ -5,7 +5,7 @@ import './moviesList.css'
 
 class MoviesList extends Component {
     render() {
-        const { movies, guestSessionId, genres, ratings, onRateMovie } = this.props
+        const { movies, guestSessionId, genres, ratings, onRateMovie } = this.props;
 
         return (
             <Row justify="center" gutter={[16, 16]}>
@@ -21,8 +21,10 @@ class MoviesList extends Component {
                     </Col>
                 ))}
             </Row>
-        )
+        );
     }
 }
+
+export default MoviesList;
 
 export default MoviesList

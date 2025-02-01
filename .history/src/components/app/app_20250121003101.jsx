@@ -19,7 +19,6 @@ class App extends Component {
             query: '',
             movies: [],
             ratedMovies: [],
-            ratings: {},
             loading: false,
             error: false,
             currentPage: 1,
@@ -72,11 +71,7 @@ class App extends Component {
 
         try {
             const data = await this.movieServices.getRatedMovies(guestSessionId)
-            const ratings = {}
-            data.results.forEach((movie) => {
-                ratings[movie.id] = movie.rating
-            })
-            this.setState({ ratedMovies: data.results, ratings })
+            this.setState({ ratedMovies: data.results })
         } catch (error) {
             console.error('Ошибка при загрузке оцененных фильмов:', error)
             this.setState({ error: true })
@@ -121,18 +116,8 @@ class App extends Component {
         })
     }
 
-    updateRating = (movieId, rating) => {
-        this.setState((prevState) => ({
-            ratings: {
-                ...prevState.ratings,
-                [movieId]: rating,
-            },
-        }))
-    }
-
     render() {
-        const { query, movies, ratedMovies, loading, currentPage, totalPages, guestSessionId, genres, ratings } =
-            this.state
+        const { query, movies, ratedMovies, loading, currentPage, totalPages, guestSessionId, genres } = this.state
 
         return (
             <GenresProvider value={genres}>
@@ -163,8 +148,6 @@ class App extends Component {
                                             movies={movies || []}
                                             guestSessionId={guestSessionId}
                                             genres={genres}
-                                            ratings={ratings}
-                                            onRateMovie={this.updateRating}
                                         />
                                         {query && (
                                             <PaginationControl
@@ -180,13 +163,7 @@ class App extends Component {
                                 {loading ? (
                                     <Spinner />
                                 ) : (
-                                    <MoviesList
-                                        movies={ratedMovies}
-                                        guestSessionId={guestSessionId}
-                                        genres={genres}
-                                        ratings={ratings}
-                                        onRateMovie={this.updateRating}
-                                    />
+                                    <MoviesList movies={ratedMovies} guestSessionId={guestSessionId} />
                                 )}
                             </TabPane>
                         </Tabs>
